@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+const crypto = require('crypto');
 
 class Statement {
     id;
@@ -14,4 +14,4 @@ class Statement {
     }
 }
 
-export default Statement;
+module.exports = Statement;

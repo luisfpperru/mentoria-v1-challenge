@@ -1,5 +1,5 @@
-import Customer from './customer.model';
-import Statement from './statement.model';
+const Customer = require('./customer.model');
+const Statement = require('./statement.model');
 
 class CustomerRepository {
     constructor() {
@@ -115,4 +115,4 @@ class CustomerRepository {
     };
 }
 
-export default CustomerRepository;
+module.exports = CustomerRepository;

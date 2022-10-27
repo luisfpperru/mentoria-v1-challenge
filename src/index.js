@@ -1,6 +1,6 @@
-import express from 'express';
+const express = require('express');
 const app = express();
-import customerRoutes from './customer/customer.routes';
+const customerRoutes = require('./customer/customer.routes');
 
 app.use(express.json());
 app.use(customerRoutes);

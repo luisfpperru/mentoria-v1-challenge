@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+const crypto = require('crypto');
 
 class Customer {
     id;
@@ -13,4 +13,4 @@ class Customer {
     }
 }
 
-export default Customer;
+module.exports = Customer;

@@ -109,4 +109,4 @@ class CustomerController {
     };
 }
 
-export default CustomerController;
+module.exports = CustomerController;

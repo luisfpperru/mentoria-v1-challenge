@@ -1,8 +1,8 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
 
-import CustomerRepository from './customer.repository';
-import CustomerController from './customer.controller';
+const CustomerRepository = require('./customer.repository');
+const CustomerController = require('./customer.controller');
 
 const customerRepository = new CustomerRepository();
 const customerController = new CustomerController(customerRepository);
@@ -58,4 +58,4 @@ router.get(
     customerController.statementByDate,
 );
 
-export default router;
+module.exports = router;

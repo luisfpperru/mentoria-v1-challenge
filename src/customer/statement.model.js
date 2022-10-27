@@ -1,17 +1,17 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
-class Statement{
+class Statement {
     id;
     description;
     amount;
     created_at;
     type;
 
-    constructor(){
-        if (!this.id){
-            this.id = crypto.randomUUID()
+    constructor() {
+        if (!this.id) {
+            this.id = crypto.randomUUID();
         }
     }
 }
 
-module.exports = Statement
+export default Statement;

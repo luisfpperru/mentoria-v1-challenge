@@ -1,20 +1,23 @@
-class CustomerController{
-    constructor(customerRepository){
+class CustomerController {
+    constructor(customerRepository) {
         this.customerRepository = customerRepository;
     }
 
     list = (request, response) => {
-        const customer = this.customerRepository.listCustomer()
+        const customer = this.customerRepository.listCustomer();
         return response.status(200).json(customer);
-    }
+    };
 
     create = (request, response) => {
-        const { cpf, name} = request.body;
+        const { cpf, name } = request.body;
 
-        const createdCustomer = this.customerRepository.createCustomer({cpf, name})
+        const createdCustomer = this.customerRepository.createCustomer({
+            cpf,
+            name,
+        });
 
         return response.status(201).json(createdCustomer);
-    }
+    };
 
     findById = (request, response) => {
         const { id } = request.params;
@@ -22,27 +25,27 @@ class CustomerController{
         const customer = this.customerRepository.findCustomerbyId(id);
 
         if (!customer) {
-            return response.status(404).json({ message: "Account not found!" });
+            return response.status(404).json({ message: 'Account not found!' });
         }
-        return response.status(200).json({customer});
-    }
+        return response.status(200).json({ customer });
+    };
 
     update = (request, response) => {
-        const { cpf, name} = request.body;
+        const { cpf, name } = request.body;
         const { id } = request.params;
 
         const updatedCustomer = this.customerRepository.updateCustomer({
             id,
             cpf,
-            name
+            name,
         });
 
         if (!updatedCustomer) {
-            return response.status(404).json({ message: "Account not found!" });
+            return response.status(404).json({ message: 'Account not found!' });
         }
 
         return response.status(200).json(updatedCustomer);
-    }
+    };
 
     delete = (request, response) => {
         const { id } = request.params;
@@ -50,52 +53,60 @@ class CustomerController{
         this.customerRepository.deleteCustomer(id);
 
         return response.status(204).send();
-    }
+    };
 
     statement = (request, response) => {
         const { id } = request.params;
 
-        let statement = this.customerRepository.statement(id)
+        let statement = this.customerRepository.statement(id);
 
         return response.status(200).json(statement);
-    }
+    };
 
     statementByDate = (request, response) => {
         const { id, date } = request.params;
 
-        let statement = this.customerRepository.statementByDate({id, date})
+        let statement = this.customerRepository.statementByDate({ id, date });
 
         return response.status(200).json(statement);
-    }
+    };
 
     withdraw = (request, response) => {
         const { id } = request.params;
-        const {description, amount} = request.body;
+        const { description, amount } = request.body;
 
-        const statement = this.customerRepository.addDebit({ id, description, amount})
+        const statement = this.customerRepository.addDebit({
+            id,
+            description,
+            amount,
+        });
 
         if (!statement) {
-            return response.status(404).json({ message: "Account not found!" });
+            return response.status(404).json({ message: 'Account not found!' });
         }
         if (statement instanceof Error) {
             return response.status(400).json({ message: statement.message });
         }
 
         return response.status(200).json(statement);
-    }
+    };
 
     deposit = (request, response) => {
         const { id } = request.params;
-        const { description, amount} = request.body;
+        const { description, amount } = request.body;
 
-        const statement = this.customerRepository.addCredit({ id, description, amount})
+        const statement = this.customerRepository.addCredit({
+            id,
+            description,
+            amount,
+        });
 
         if (!statement) {
-            return response.status(404).json({ message: "Account not found!" });
+            return response.status(404).json({ message: 'Account not found!' });
         }
 
         return response.status(200).json(statement);
-    }
+    };
 }
 
-module.exports = CustomerController;
+export default CustomerController;

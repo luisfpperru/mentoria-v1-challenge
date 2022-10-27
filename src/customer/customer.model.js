@@ -1,16 +1,16 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
-class Customer{
+class Customer {
     id;
     cpf;
     name;
     statements = [];
 
-    constructor(){
-        if (!this.id){
-            this.id = crypto.randomUUID()
+    constructor() {
+        if (!this.id) {
+            this.id = crypto.randomUUID();
         }
     }
 }
 
-module.exports = Customer
+export default Customer;

@@ -3,7 +3,6 @@ const router = express.Router();
 
 const CustomerRepository = require('./customer.repository');
 const CustomerController = require('./customer.controller');
-const CustomerMiddlewares = require('./customer.middleware');
 
 const customerRepository = new CustomerRepository();
 const customerController = new CustomerController(customerRepository);
@@ -26,7 +25,9 @@ const verifyIfAccountExists = (request, response, next) => {
 }
 
 
-router.get('/', customerController.list)
+router.get('/account', customerController.list)
+
+router.get('/account/:id', verifyIfAccountExists, customerController.findById)
 
 router.post('/account', verifyIfAccountCpfExists, customerController.create)
 

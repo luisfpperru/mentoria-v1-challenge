@@ -27,7 +27,7 @@ class CustomerController {
         if (!customer) {
             return response.status(404).json({ message: 'Account not found!' });
         }
-        return response.status(200).json({ customer });
+        return response.status(200).json(customer);
     };
 
     update = (request, response) => {
@@ -57,16 +57,14 @@ class CustomerController {
 
     statement = (request, response) => {
         const { id } = request.params;
+        const { date } = request.query;
 
-        let statement = this.customerRepository.statement(id);
-
-        return response.status(200).json(statement);
-    };
-
-    statementByDate = (request, response) => {
-        const { id, date } = request.params;
-
-        let statement = this.customerRepository.statementByDate({ id, date });
+        let statement;
+        if (date){
+            statement = this.customerRepository.statementByDate({ id, date });
+        } else {
+            statement = this.customerRepository.statement(id);
+        }
 
         return response.status(200).json(statement);
     };

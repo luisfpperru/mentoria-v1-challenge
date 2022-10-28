@@ -52,10 +52,4 @@ router.get(
     customerController.statement,
 );
 
-router.get(
-    '/statement/:id/:date',
-    verifyIfAccountExists,
-    customerController.statementByDate,
-);
-
 module.exports = router;
